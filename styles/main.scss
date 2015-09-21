@@ -1,0 +1,109 @@
+.header {
+	background-color: #4C6F99;
+	height: 3em;
+	width: 100%;
+
+	#menu {
+		height: 2em;
+		width: 2em;
+		margin: 0.5em 0 0.5em 2em;
+		background: no-repeat center/100% url("/images/ios7-plus-empty.png");
+		background-color: #B6B6B6;
+		border-radius: 100%;
+	}
+
+	#dropDown {
+		display: none;
+		position: absolute;
+		z-index: 9999;
+		width: 100%;
+
+		#menuContainer {
+			background-color: #ffffff;
+			padding-top: 1em;
+
+			#url {
+				display: block;
+				margin: 0.5em auto;
+				width: 60%;
+				height: 2em;
+			}
+
+			#errorUrl {
+				display: none;
+			}
+			
+			#caption {
+				display: block;
+				margin: 0.5em auto;
+				width: 60%;
+				height: 5em;
+				box-sizing: border-box;
+			}
+
+			#errorCaption {
+				display: none;
+			}
+
+			#cancel {
+				display: inline-block;
+				height: 3em;
+				width: 8em;
+				background-color: #B6B6B6;
+				text-decoration: none;
+				text-align: center;
+				color: #ffffff;
+				padding-top: 1em;
+				box-sizing: border-box;
+				margin-left: 50%;
+				border-radius: 10px;
+			}
+			#addImage {
+				display: inline-block;
+				height: 3em;
+				width: 8em;
+				background-color: #17AA56;
+				text-decoration: none;
+				text-align: center;
+				color: #ffffff;
+				padding-top: 1em;
+				box-sizing: border-box;
+				border-radius: 10px;
+			}
+		}
+	}
+}
+
+.outerColumn {
+	background-color: #EDEEEF;
+	height: 100em;
+
+	.innerColumn {
+		background-color: #E0E1E2;
+		margin: 0 auto 0 auto;
+		padding: 1em;
+
+		.imageBox {
+			width: 98%;
+			margin: 0 auto;
+		}
+
+		.addedImage {
+			height: 100%;
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.addedCaption {
+			text-align: center;
+			margin-bottom: 3em;
+		}
+	}
+}
+
+@media screen and (min-width: 700px) {
+	.innerColumn {
+		width: 80%;
+		margin: 0 auto;
+	}
+}

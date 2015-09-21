@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery Image Board</title>
+	<link rel="stylesheet" type="text/css" href="/styles/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/styles/main.sass.css">
+</head>
+<body>
+	<div class="header">
+		<button id="menu"></button>
+		<div id="dropDown">
+			<div id="menuContainer">
+				<input id="url" type="text" placeholder="Image URL">
+				<div id="errorUrl">URL must contain valid image link</div>
+				<textarea id="caption" placeholder="Image Caption"></textarea>
+				<div id="errorCaption">Caption must contain text</div>
+				<a href="#" id="cancel">CANCEL</a>
+				<a href="#" id="addImage">ADD IMAGE</a>
+			</div>
+		</div>
+	</div>
+	<div class="outerColumn">
+		<div class="innerColumn"></div>
+	</div>
+
+	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/scripts/main.js"></script>
+</body>
+</html>
