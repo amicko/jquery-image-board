@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 
-	var $menu = $('#menu');
+	Parse.initialize("h9qRnl0BufCnopYWT3vBnZMONh2RiicF7V5M0OuL", "bl6JAQlzkISbbkwdzvAqQX65z8cOypGeEvQi4fY2");var $menu = $('#menu');
 	var $dropDownMenu = $('#dropDown');
 	var $outerColumn = $('.outerColumn');
 	var $innerColumn = $('.innerColumn');
@@ -15,11 +15,56 @@ $(document).ready(function () {
 	var $cancel = $('#cancel');
 	var $addImage = $('#addImage');
 
-	$.get('http://tiyfe.herokuapp.com/collections/micko-images', function (response) {
-		for (var i = 0; i < response.length; i++) {
-			$innerColumn.append('<div class="imageBox">' + '<img  class="addedImage" src="' + response[i].image + '">' + '</div><div class="addedCaption">' + response[i].caption + '</div>');
+	// $.get(
+	// 	'http://tiyfe.herokuapp.com/collections/micko-images',
+	// 	function(response) {
+	// 		for(var i = 0; i < response.length; i++) {
+	// 			$innerColumn.append('<div class="imageBox">' + '<img  class="addedImage" src="' + response[i].image + '">' + '</div><div class="addedCaption">' + response[i].caption + '</div>')
+	// 		}
+	// 	},
+	// 	'json'
+	// 	)
+
+	var ImageModel = Parse.Object.extend('ImageModel');
+	var ImageQuery = new Parse.Query(ImageModel);
+	var Images = null;
+
+	ImageQuery.descending('createdAt').find().then(function (images) {
+		// console.log(images[0].get('ImageURL'))
+		Images = images;
+		// return Images
+		if (!Images) {
+			console.log('Loading...');
+		} else {
+			// console.log(Images)
+			var ImageList = Images.map(function (image) {
+				// return image.get('ImageURL')
+				return $innerColumn.append('<div class="imageBox">' + '<img  class="addedImage" src="' + image.get('ImageURL') + '">' + '</div><div class="addedCaption">' + image.get('Caption') + '</div>');
+			});
 		}
-	}, 'json');
+	});
+
+	// if(!Images) {
+	// 	console.log('Loading...')
+	// }
+	// else {
+	// 	console.log(Images)
+	// 	var ImageList = Images.map(function(image) {
+	// 		return image.get('ImageURL')
+	// 	})
+	// 	console.log(ImageList);
+	// }
+
+	// var ImageList = Images.map(function(image) {
+	// 	return image.get('ImageURL')
+	// })
+
+	// if(ImageList === []) {
+	// 	console.log('Loading...')
+	// }
+	// else {
+	// 	console.log(ImageList)
+	// }
 
 	$menu.click(function () {
 		$dropDownMenu.toggle('slow');
@@ -51,7 +96,21 @@ $(document).ready(function () {
 		}
 		if ($url.val().indexOf('http') !== -1 && $caption.val() !== '') {
 
-			$.post('http://tiyfe.herokuapp.com/collections/micko-images', { image: $url.val(), caption: $caption.val() }, function (result) {}, 'json');
+			// $.post(
+			// 	'http://tiyfe.herokuapp.com/collections/micko-images',
+			// 	{image: $url.val(), caption: $caption.val()},
+			// 	function(result) {
+			// 	},
+			// 	'json'
+			// )
+
+			// ImageModel = Parse.Object.extend('ImageModel');
+			var NewImage = new ImageModel({
+				ImageURL: $url.val(),
+				Caption: $caption.val()
+			}).save();
+
+			location.reload();
 
 			$errorUrl.hide();
 			$errorCaption.hide();
@@ -63,11 +122,15 @@ $(document).ready(function () {
 
 		$innerColumn.html('');
 
-		$.get('http://tiyfe.herokuapp.com/collections/micko-images', function (response) {
-			for (var i = 0; i < response.length; i++) {
-				$innerColumn.append('<div class="imageBox">' + '<img  class="addedImage" src="' + response[i].image + '">' + '</div><div class="addedCaption">' + response[i].caption + '</div>');
-			}
-		}, 'json');
+		// $.get(
+		// 'http://tiyfe.herokuapp.com/collections/micko-images',
+		// function(response) {
+		// 	for(var i = 0; i < response.length; i++) {
+		// 		$innerColumn.append('<div class="imageBox">' + '<img  class="addedImage" src="' + response[i].image + '">' + '</div><div class="addedCaption">' + response[i].caption + '</div>')
+		// 	}
+		// },
+		// 'json'
+		// )
 	});
 });
 
